@@ -1,0 +1,15 @@
+﻿<Properties StartupConfiguration="{1BF596D2-6B5F-AE0C-3C03-1AE1422E4997}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Planet.cs">
+    <Files>
+      <File FileName="Assets/Scripts/TerrainFace.cs" Line="15" Column="6" />
+      <File FileName="Assets/Planet.cs" Line="13" Column="32" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="123da4dc-ee9c-4119-a2d1-32deceb651e2" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

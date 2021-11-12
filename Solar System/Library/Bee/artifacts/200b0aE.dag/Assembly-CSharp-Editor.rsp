@@ -331,7 +331,8 @@
 -r:"Library/Bee/artifacts/200b0aE.dag/UnityEngine.TestRunner.ref.dll"
 -r:"Library/Bee/artifacts/200b0aE.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/200b0aE.dag/VSSettingsProvider.ref.dll"
-"Assets/Editor/PlanetEditor.cs"
+"Assets/Scripts/Editor/ConditionalHidePropertyDrawer.cs"
+"Assets/Scripts/Editor/PlanetEditor.cs"
 -langversion:8.0
 
 /deterministic

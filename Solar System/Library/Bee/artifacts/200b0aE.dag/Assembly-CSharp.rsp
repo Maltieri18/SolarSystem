@@ -320,12 +320,16 @@
 -r:"Library/Bee/artifacts/200b0aE.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/200b0aE.dag/VSSettingsProvider.ref.dll"
 "Assets/Scripts/ColorSetting.cs"
+"Assets/Scripts/ConditionalHideAttribute.cs"
+"Assets/Scripts/INoiseFilter.cs"
 "Assets/Scripts/Noise.cs"
-"Assets/Scripts/NoiseFilter.cs"
+"Assets/Scripts/NoiseFilterFactory.cs"
 "Assets/Scripts/NoiseSetting.cs"
 "Assets/Scripts/Planet.cs"
+"Assets/Scripts/RidgidNoiseFilter.cs"
 "Assets/Scripts/ShapeGenerator.cs"
 "Assets/Scripts/ShapeSetting.cs"
+"Assets/Scripts/SimpleNoiseFilter.cs"
 "Assets/Scripts/TerrainFace.cs"
 -langversion:8.0
 

@@ -7,19 +7,26 @@ public class Planet : MonoBehaviour
 
     [Range(2, 256)]
     public int resolution = 10;
+    public bool autoUpdate = true;
+
+    public ShapeSetting shapeSetting;
+    public ColorSetting colorSetting;
+
+    [HideInInspector]
+    public bool shapeSettingFoldout;
+    [HideInInspector]
+    public bool colorSettingFoldout;
+
+    ShapeGenerator shapeGenerator;
 
     [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
     TerrainFace[] terrainFaces;
 
-    private void OnValidate()
-    {
-        Init();
-        GenerateFaces();
-    }
-
     public void Init()
     {
+        shapeGenerator = new ShapeGenerator(shapeSetting);
+
         if (meshFilters == null || meshFilters.Length == 0)
         {
             meshFilters = new MeshFilter[6];
@@ -40,11 +47,36 @@ public class Planet : MonoBehaviour
                 meshFilters[i].sharedMesh = new Mesh();
             }
 
-            terrainFaces[i] = new TerrainFace(meshFilters[i].sharedMesh, resolution, dir[i]);
+            terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].sharedMesh, resolution, dir[i]);
         }
     }
 
-    public void GenerateFaces()
+    public void GeneratePlanet()
+    {
+        Init();
+        GenerateFaces();
+        GenerateColors();
+    }
+
+    public void OnShapeSettingUpdate()
+    {
+        if (autoUpdate)
+        {
+            Init();
+            GenerateFaces();
+        }
+    }
+
+    public void OnColorSettingUpdate()
+    {
+        if (autoUpdate)
+        {
+            Init();
+            GenerateColors();
+        }
+    }
+
+    void GenerateFaces()
     {
         foreach (TerrainFace face in terrainFaces)
         {
@@ -52,4 +84,11 @@ public class Planet : MonoBehaviour
         }
     }
 
+    void GenerateColors()
+    {
+        foreach(MeshFilter filter in meshFilters)
+        {
+            filter.GetComponent<MeshRenderer>().sharedMaterial.color = colorSetting.color;
+        }
+    }
 }

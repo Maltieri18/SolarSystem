@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TerrainFace
-{
+{ 
+    ShapeGenerator shapeGenerator;
     Mesh mesh;
     int res;
     Vector3 upwardsVec;
     Vector3 aAxis;
     Vector3 bAxis;
 
-    public TerrainFace(Mesh mesh, int res, Vector3 upwardsVec)
+    public TerrainFace(ShapeGenerator shapeGenerator, Mesh mesh, int res, Vector3 upwardsVec)
     {
+        this.shapeGenerator = shapeGenerator;
         this.mesh = mesh;
         this.res = res;
         this.upwardsVec = upwardsVec;
@@ -36,7 +38,7 @@ public class TerrainFace
                 Vector2 proportion = new Vector2(x, y) / (res - 1); //Scales down (x, y) in terms of the resolution
                 Vector3 pointOnCube = upwardsVec + (proportion.x - 0.5f) * 2 * aAxis + (proportion.y - 0.5f) * 2 * bAxis; //Rescale in terms of (-1, 1)
                 Vector3 pointOnSphere = pointOnCube.normalized;
-                vertices[i] = pointOnSphere;
+                vertices[i] = shapeGenerator.GetPointOnPlanet(pointOnSphere);
 
                 if(x != res - 1 && y != res - 1)
                 {
@@ -57,7 +59,7 @@ public class TerrainFace
         mesh.Clear();
         mesh.vertices = vertices;
         mesh.triangles = trianglesIndex;
-        mesh.normals = vertices;
-        //mesh.RecalculateNormals();
+        //mesh.normals = vertices;
+        mesh.RecalculateNormals();
     }
 }

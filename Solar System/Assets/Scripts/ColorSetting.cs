@@ -5,5 +5,6 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class ColorSetting : ScriptableObject
 {
-    public Color color;
+    public Gradient gradient;
+    public Material planetMat;
 }

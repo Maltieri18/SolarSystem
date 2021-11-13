@@ -19,15 +19,21 @@ public class Planet : MonoBehaviour
     [HideInInspector]
     public bool colorSettingFoldout;
 
-    ShapeGenerator shapeGenerator;
+    ShapeGenerator shapeGenerator = new ShapeGenerator();
+    ColorGenerator colorGenerator = new ColorGenerator();
 
     [SerializeField, HideInInspector]
-    MeshFilter[] meshFilters;
+    MeshFilter[] meshFilters;  
     TerrainFace[] terrainFaces;
 
+    private void Start()
+    {
+        GeneratePlanet();
+    }
     public void Init()
     {
-        shapeGenerator = new ShapeGenerator(shapeSetting);
+        shapeGenerator.UpdateSettings(shapeSetting);
+        colorGenerator.UpdateSettings(colorSetting);
 
         if (meshFilters == null || meshFilters.Length == 0)
         {
@@ -44,11 +50,11 @@ public class Planet : MonoBehaviour
                 GameObject meshObject = new GameObject("mesh");
                 meshObject.transform.parent = transform;
 
-                meshObject.AddComponent<MeshRenderer>().sharedMaterial = new Material(Shader.Find("Standard"));
+                meshObject.AddComponent<MeshRenderer>();
                 meshFilters[i] = meshObject.AddComponent<MeshFilter>();
                 meshFilters[i].sharedMesh = new Mesh();
             }
-
+            meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSetting.planetMat;
             terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].sharedMesh, resolution, dir[i]);
             bool renderFace = faceRender == FaceRender.All || (int)faceRender - 1 == i;
             meshFilters[i].gameObject.SetActive(renderFace);
@@ -89,13 +95,15 @@ public class Planet : MonoBehaviour
                 terrainFaces[i].CreateMesh();
             }
         }
+
+        colorGenerator.UpdateElevation(shapeGenerator.heightMinMax);
     }
 
     void GenerateColors()
     {
         foreach(MeshFilter filter in meshFilters)
         {
-            filter.GetComponent<MeshRenderer>().sharedMaterial.color = colorSetting.color;
+            colorGenerator.UpdateColors();
         }
     }
 }

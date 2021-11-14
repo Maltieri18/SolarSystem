@@ -22,6 +22,7 @@ public class PlanetEditor : Editor
         }
 
         if (GUILayout.Button("Generate Planet")) planet.GeneratePlanet();
+        if (GUILayout.Button("Print MinMax")) planet.PrintMinMax();
 
         DrawSettingsEditor(planet.shapeSetting, planet.OnShapeSettingUpdate, ref planet.shapeSettingFoldout, ref shapeEditor);
         DrawSettingsEditor(planet.colorSetting, planet.OnColorSettingUpdate, ref planet.colorSettingFoldout, ref colorEditor);

@@ -60,7 +60,18 @@ public class Planet : MonoBehaviour
             meshFilters[i].gameObject.SetActive(renderFace);
         }
     }
-
+    public void PrintMinMax()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            if (meshFilters[i].gameObject.activeSelf) //If its active
+            {
+                Debug.Log(terrainFaces[i].shapeGenerator.heightMinMax.Max);
+                Debug.Log(terrainFaces[i].shapeGenerator.heightMinMax.Min);
+                Debug.Log("=============================================");
+            }
+        }
+    }
     public void GeneratePlanet()
     {
         Init();
@@ -101,9 +112,13 @@ public class Planet : MonoBehaviour
 
     void GenerateColors()
     {
-        foreach(MeshFilter filter in meshFilters)
+        colorGenerator.UpdateColors();
+        for(int i = 0; i < 6; i++)
         {
-            colorGenerator.UpdateColors();
+            if(meshFilters[i].gameObject.activeSelf)
+            {
+                terrainFaces[i].UpdateUV(colorGenerator);
+            }
         }
     }
 }
